@@ -1,0 +1,24 @@
+.cartPage {
+  background: var(--color-background, #19232b);
+  min-height: 100vh;
+  padding: 2.5rem 0;
+}
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+.cartList {
+  background: var(--color-surface, #22313a);
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+.cartTotal {
+  text-align: right;
+  font-weight: 700;
+  color: var(--color-accent, #4fc3f7);
+  margin-top: 1.5rem;
+  font-size: 1.1rem;
+}
