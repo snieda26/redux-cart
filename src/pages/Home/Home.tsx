@@ -1,13 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import products from '@/mock-data.json';
-import { CartContext } from '@/context/CartContext';
 import { ProductCard } from '@/components';
 import styles from '@/styles/pages/Home.module.scss';
 import { Container } from '@/components/common/Container';
 
 const Home: React.FC = () => {
-  const { addToCart } = useContext(CartContext);
-
   return (
     <div className={styles.homePage}>
       <Container>
@@ -20,7 +17,7 @@ const Home: React.FC = () => {
               title={product.title}
               description={product.description}
               price={product.price}
-              onAdd={() => addToCart(product)}
+              onAdd={() => {}}
             />
           ))}
         </div>
