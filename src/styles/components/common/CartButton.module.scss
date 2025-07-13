@@ -1,0 +1,48 @@
+@import '@/styles/_variables.scss';
+
+.cartButton {
+  display: flex;
+  align-items: center;
+  background: $blue;
+  border-radius: 16px;
+  padding: 10px 20px;
+  color: #f8e9f0;
+  font-size: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  gap: 6px;
+  cursor: pointer;
+
+  .price {
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+  }
+
+  .divider {
+    width: 1.5px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 1px;
+    margin: 0 5px;
+    display: inline-block;
+  }
+
+  .iconWrap {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .icon {
+    width: 16px;
+    height: 16px;
+    filter: brightness(2) grayscale(1) opacity(0.8);
+  }
+
+  .count {
+    font-size: 16px;
+    font-weight: 400;
+    margin-left: 1px;
+  }
+}

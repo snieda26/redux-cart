@@ -1,16 +1,14 @@
+@import '@/styles/_variables.scss';
+
 .homePage {
-  background: var(--color-background, #19232b);
+  background: $dark-grey;
   min-height: 100vh;
   padding: 2.5rem 0;
 }
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-}
+
 .productGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 2rem 1.5rem;
-  margin-top: 2rem;
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-top: 60px;
 }

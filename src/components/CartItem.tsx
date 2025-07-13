@@ -11,7 +11,9 @@ interface CartItemProps {
 
 const CartItem: React.FC<CartItemProps> = ({ image, title, description, price, quantity }) => (
   <div className={styles.cartItem}>
-    <img src={image} alt={title} className={styles.cartItemImage} />
+    <div className={styles.cartItemImageContainer}>
+      <img src={image} alt={title} className={styles.cartItemImage} />
+    </div>
     <div className={styles.cartItemInfo}>
       <div className={styles.cartItemTitle}>{title}</div>
       <div className={styles.cartItemDesc}>{description}</div>

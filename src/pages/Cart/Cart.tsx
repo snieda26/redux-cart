@@ -2,13 +2,25 @@ import React, { useContext } from 'react';
 import { CartItem, Card } from '@/components';
 import { CartContext } from '@/context/CartContext';
 import styles from '@/styles/pages/Cart.module.scss';
+import { Container } from '@/components/common/Container';
 
 const Cart: React.FC = () => {
   const { cart, total } = useContext(CartContext);
+
+  if (!cart.length) {
+    return <div className={styles.emptyCart}>No items in cart</div>;
+  }
+
   return (
     <div className={styles.cartPage}>
-      <div className={styles.container}>
-        <h2>My orders</h2>
+      <Container
+        additionalStyles={{
+          maxWidth: '1000px',
+          margin: '0 auto',
+          padding: '0 1.5rem',
+          marginTop: '80px',
+        }}
+      >
         <Card className={styles.cartList}>
           {cart.map((item: any) => (
             <CartItem
@@ -21,10 +33,10 @@ const Cart: React.FC = () => {
             />
           ))}
           <div className={styles.cartTotal}>
-            Total: <b>{total} $</b>
+            Total: <b>{total.toFixed(2)} $</b>
           </div>
         </Card>
-      </div>
+      </Container>
     </div>
   );
 };

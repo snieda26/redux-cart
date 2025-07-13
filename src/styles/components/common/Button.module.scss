@@ -1,5 +1,7 @@
+@import '@/styles/_variables.scss';
+
 .btn {
-  background: var(--color-primary, #1976d2);
+  background: $blue;
   color: #fff;
   border: none;
   border-radius: 8px;

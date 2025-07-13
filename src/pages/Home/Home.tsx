@@ -3,16 +3,19 @@ import products from '@/mock-data.json';
 import { CartContext } from '@/context/CartContext';
 import { ProductCard } from '@/components';
 import styles from '@/styles/pages/Home.module.scss';
+import { Container } from '@/components/common/Container';
 
 const Home: React.FC = () => {
   const { addToCart } = useContext(CartContext);
+
   return (
     <div className={styles.homePage}>
-      <div className={styles.container}>
+      <Container>
         <div className={styles.productGrid}>
           {products.map((product: any) => (
             <ProductCard
               key={product.id}
+              id={product.id}
               image={product.image}
               title={product.title}
               description={product.description}
@@ -21,7 +24,7 @@ const Home: React.FC = () => {
             />
           ))}
         </div>
-      </div>
+      </Container>
     </div>
   );
 };

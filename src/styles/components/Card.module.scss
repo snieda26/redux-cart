@@ -1,5 +1,7 @@
+@import '@/styles/_variables.scss';
+
 .card {
-  background: var(--color-surface, #22313a);
+  background: $primary-bg;
   border-radius: 16px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   padding: 1.5rem;
