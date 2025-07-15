@@ -1,17 +1,55 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from '@/styles/pages/Product.module.scss';
 import Button from '@/components/common/Button';
-import mockData from '@/mock-data.json';
+import LoadingSpinner from '@/components/common/LoadingSpinner';
+import { useAppSelector, useAppDispatch } from '@/store/hooks';
+import { fetchProductById } from '@/store/slices/productsSlice';
+import { addToCart } from '@/store/slices/cartSlice';
 
 const Product: React.FC = () => {
   const { id } = useParams();
+  const dispatch = useAppDispatch();
+  const {
+    selectedProduct: product,
+    loading,
+    error,
+  } = useAppSelector((state: any) => state.products);
 
-  const product = Array.isArray(mockData)
-    ? mockData.find((item: any) => String(item.id) === String(id))
-    : null;
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchProductById(parseInt(id)));
+    }
+  }, [dispatch, id]);
 
-  if (!product) return <div className={styles.notFound}>Product not found.</div>;
+  const handleAddToCart = () => {
+    if (product) {
+      dispatch(addToCart(product));
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className={styles.productPageWrapper}>
+        <div className={styles.loadingContainer}>
+          <LoadingSpinner size="large" />
+          <div className={styles.loadingText}>Loading product...</div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className={styles.productPageWrapper}>
+        <div className={styles.errorContainer}>Error: {error}</div>
+      </div>
+    );
+  }
+
+  if (!product) {
+    return <div className={styles.notFound}>Product not found.</div>;
+  }
 
   return (
     <div className={styles.productPageWrapper}>
@@ -24,7 +62,7 @@ const Product: React.FC = () => {
           <p className={styles.productDesc}>{product.description}</p>
           <div className={styles.productFooter}>
             <span className={styles.productPrice}>{product.price} $</span>
-            <Button onClick={() => {}}>Buy</Button>
+            <Button onClick={handleAddToCart}>Add to Cart</Button>
           </div>
         </div>
       </div>

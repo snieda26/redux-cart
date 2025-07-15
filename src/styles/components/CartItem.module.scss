@@ -23,21 +23,56 @@
     color: $grey;
     margin-top: 20px;
   }
-  .cartItemQty {
-    font-size: 0.95rem;
-    color: $grey;
+  .cartItemControls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
     margin-left: 1.5rem;
-    min-width: 3em;
-    text-align: right;
+    min-width: 120px;
     align-self: center;
+  }
+  .quantityControls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  .quantityBtn {
+    background: #4fc3f7;
+    border: none;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    &:hover {
+      background: #29b6f6;
+    }
+  }
+  .quantity {
+    font-weight: 600;
+    color: $white;
+    min-width: 2em;
+    text-align: center;
   }
   .cartItemPrice {
     font-weight: 700;
     color: #4fc3f7;
-    margin-left: 1.5rem;
-    min-width: 4em;
-    text-align: right;
-    align-self: center;
+    text-align: center;
+  }
+  .removeBtn {
+    background: #f44336;
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    &:hover {
+      background: #d32f2f;
+    }
   }
 }
 .cartItemImage {

@@ -12,3 +12,19 @@
   flex-wrap: wrap;
   margin-top: 60px;
 }
+
+.loadingContainer {
+  text-align: center;
+  padding: 2rem;
+
+  .loadingText {
+    margin-top: 1rem;
+    color: $white;
+  }
+}
+
+.errorContainer {
+  text-align: center;
+  padding: 2rem;
+  color: #f44336;
+}
