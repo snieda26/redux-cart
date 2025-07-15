@@ -1,27 +1,23 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { ProductCard } from '@/components';
 import styles from '@/styles/pages/Home.module.scss';
 import { Container } from '@/components/common/Container';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
-import { useAppSelector, useAppDispatch } from '@/store/hooks';
-import { fetchProducts } from '@/store/slices/productsSlice';
+import { useAppDispatch } from '@/store/hooks';
 import { addToCart } from '@/store/slices/cartSlice';
+import { useGetProductsQuery } from '@/store/api/productsApi';
 import { IProduct } from '@/types/product';
 import { RootState } from '@/store';
 
 const Home: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { items: products, loading, error } = useAppSelector((state: RootState) => state.products);
-
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
+  const { data: products, isLoading, error } = useGetProductsQuery();
 
   const handleAddToCart = (product: IProduct) => {
     dispatch(addToCart(product));
   };
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className={styles.homePage}>
         <Container>
@@ -38,7 +34,19 @@ const Home: React.FC = () => {
     return (
       <div className={styles.homePage}>
         <Container>
-          <div className={styles.errorContainer}>Error: {error}</div>
+          <div className={styles.errorContainer}>
+            Error: {'data' in error ? String(error.data) : 'Failed to load products'}
+          </div>
+        </Container>
+      </div>
+    );
+  }
+
+  if (!products) {
+    return (
+      <div className={styles.homePage}>
+        <Container>
+          <div className={styles.errorContainer}>No products found</div>
         </Container>
       </div>
     );

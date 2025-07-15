@@ -1,26 +1,23 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import styles from '@/styles/pages/Product.module.scss';
 import Button from '@/components/common/Button';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
-import { useAppSelector, useAppDispatch } from '@/store/hooks';
-import { fetchProductById } from '@/store/slices/productsSlice';
+import { useAppDispatch } from '@/store/hooks';
+import { useGetProductByIdQuery } from '@/store/api/productsApi';
 import { addToCart } from '@/store/slices/cartSlice';
+import { RootState } from '@/store';
 
 const Product: React.FC = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const {
-    selectedProduct: product,
-    loading,
+    data: product,
+    isLoading,
     error,
-  } = useAppSelector((state: any) => state.products);
-
-  useEffect(() => {
-    if (id) {
-      dispatch(fetchProductById(parseInt(id)));
-    }
-  }, [dispatch, id]);
+  } = useGetProductByIdQuery(parseInt(id || '0'), {
+    skip: !id,
+  });
 
   const handleAddToCart = () => {
     if (product) {
@@ -28,7 +25,7 @@ const Product: React.FC = () => {
     }
   };
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className={styles.productPageWrapper}>
         <div className={styles.loadingContainer}>
@@ -42,7 +39,9 @@ const Product: React.FC = () => {
   if (error) {
     return (
       <div className={styles.productPageWrapper}>
-        <div className={styles.errorContainer}>Error: {error}</div>
+        <div className={styles.errorContainer}>
+          Error: {'data' in error ? String(error.data) : 'Failed to load product'}
+        </div>
       </div>
     );
   }

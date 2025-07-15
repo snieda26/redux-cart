@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { store } from '@/store';
+import { store, RootState } from '@/store';
 import { useAppSelector } from '@/store/hooks';
 import Home from '@/pages/Home/Home';
 import Cart from '@/pages/Cart/Cart';
@@ -11,7 +11,7 @@ import cartIcon from '@/assets/icons/cart.svg';
 import styles from '@/styles/components/common/CartButton.module.scss';
 
 const CartButton: React.FC = () => {
-  const { total, itemCount } = useAppSelector((state: any) => state.cart);
+  const { total, itemCount } = useAppSelector((state: RootState) => state.cart);
 
   return (
     <Link to="/cart" className={styles.cartButton}>
